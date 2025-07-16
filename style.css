@@ -1,0 +1,279 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #e3e9f1;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: #fff;
+  border-radius: 40%;
+  width: 700px;
+  height: 600px;
+  max-width: 90vmin;
+  max-height: 90vmin;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+form {
+  background: #fff;
+  padding: 0 30px;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+input {
+  background: #f0f0f0;
+  border: none;
+  margin: 6px 0;
+  padding: 14px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus {
+  outline: none;
+  background: #e8e8e8;
+  transform: scale(1.02);
+}
+
+button {
+  margin-top: 20px;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 35px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button.filled {
+  background-color: #d49d1f;
+  color: white;
+}
+
+button.filled:hover {
+  background-color: #b8881a;
+}
+
+button.ghost {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+button.ghost:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.social-icons {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons i {
+  background: #eee;
+  margin: 0;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icons i:hover {
+  background: #ddd;
+  transform: translateY(-2px);
+}
+
+a {
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  margin-top: 15px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #d49d1f;
+}
+
+.form-container {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-container {
+  left: 0;
+  z-index: 2;
+}
+
+.sign-up-container {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+  transform: translateX(-100%);
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.overlay-container {
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: linear-gradient(135deg, #3450a1 0%, #e2782d 100%);
+  color: white;
+  position: relative;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+  left: 0;
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+/* Add subtle animations on form elements */
+.form-container h2 {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.form-container input,
+.form-container button,
+.form-container .social-icons,
+.form-container a {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    width: 80vmin;
+    height: 80vmin;
+  }
+  
+  form {
+    padding: 0 20px;
+    max-width: 240px;
+  }
+  
+  .overlay-panel {
+    padding: 0 20px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .social-icons i {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+}
